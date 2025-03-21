@@ -34,100 +34,79 @@ mvn spring-boot:run
 ```
 Ứng dụng sẽ chạy tại `http://localhost:8080`.
 
-## 4. API Endpoints
 
-### 4.1. Task Management
-#### 4.1.1. Lấy danh sách công việc
-```http
-GET /api/tasks
-```
-- **Mô tả**: Lấy danh sách tất cả các công việc.
-- **Phản hồi**:
-  ```json
-  [
-    {
-      "title": "Viec can 9",
-      "description": "xem phim marval",
-      "dueDate": "20-03-2025 17:30:00",
-      "priority": false,
-      "status": false,
-      "dependencies": []
-    }
-  ]
-  ```
-
-#### 4.1.2. Lấy thông tin công việc theo ID
-```http
-GET /api/tasks/{id}
-```
-- **Mô tả**: Lấy chi tiết một công việc theo ID.
-- **Phản hồi**:
-- ![Homepage](https://github.com/huynhhongson/img-todo-list-application/blob/main/get-task.png)
-  ```json
-  {
-    "id": 1,
-    "title": "Hoàn thành báo cáo",
-    "description": "Báo cáo quý 1",
-    "dueDate": "2025-03-21T10:00:00"
-  }
-  ```
-
-#### 4.1.3. Tạo công việc mới
+## 4. Create a RESTful API for a to-do list application:
+### 4.1. Tạo một task mới
 ```http
 POST /api/tasks
 ```
-- **Yêu cầu**:
-  ```json
-  {
-    "title": "Họp nhóm",
-    "description": "Họp dự án lúc 14h",
-    "dueDate": "2025-03-22T14:00:00"
-  }
-  ```
+- **Mô tả**: Lấy danh sách tất cả các task.
 - **Phản hồi**:
-  ```json
-  {
-    "id": 2,
-    "title": "Họp nhóm",
-    "description": "Họp dự án lúc 14h",
-    "dueDate": "2025-03-22T14:00:00"
-  }
-  ```
+- ![create-a-new-task](https://github.com/huynhhongson/img-todo-list-application/blob/main/create-new-task.png)
+### 4.2. Lấy danh sách task
+```http
+GET /api/tasks
+```
+- **Mô tả**: Lấy danh sách tất cả các task.
+- **Phản hồi**:
+- ![get-all-task](https://github.com/huynhhongson/img-todo-list-application/blob/main/get-all-task.png)
+### 4.3. Lấy thông tin task theo ID
+```http
+GET /api/tasks/{id}
+```
+- **Mô tả**: Lấy chi tiết một task theo ID.
+- **Phản hồi**:
+- ![get-task](https://github.com/huynhhongson/img-todo-list-application/blob/main/get-task.png)
 
-#### 4.1.4. Cập nhật công việc
+### 4.4. Sửa task theo ID
 ```http
 PUT /api/tasks/{id}
 ```
-- **Yêu cầu**:
-  ```json
-  {
-    "title": "Họp nhóm sửa đổi",
-    "description": "Dời lịch họp sang 15h",
-    "dueDate": "2025-03-22T15:00:00"
-  }
-  ```
+- **Mô tả**: Sửa thông tin task theo ID.
 - **Phản hồi**:
-  ```json
-  {
-    "id": 2,
-    "title": "Họp nhóm sửa đổi",
-    "description": "Dời lịch họp sang 15h",
-    "dueDate": "2025-03-22T15:00:00"
-  }
-  ```
-
-#### 4.1.5. Xóa công việc
+- ![update-task-detail](https://github.com/huynhhongson/img-todo-list-application/blob/main/update-task-detail.png)
+### 4.5. Sửa trạng thái task
+```http
+PATCH /api/tasks/{id}/status
+```
+- **Mô tả**: Sửa thông tin task theo ID.
+- **Phản hồi**:
+- ![update-task-status](https://github.com/huynhhongson/img-todo-list-application/blob/main/update-task-status.png)
+### 4.6. xóa task
 ```http
 DELETE /api/tasks/{id}
 ```
-- **Mô tả**: Xóa một công việc theo ID.
+- **Mô tả**: Sửa thông tin task theo ID.
 - **Phản hồi**:
-  ```json
-  {
-    "message": "Task deleted successfully"
-  }
-  ```
+- ![delete-task](https://github.com/huynhhongson/img-todo-list-application/blob/main/delete-task.png)
 
-## 5. Liên hệ
+
+## 5. Task Dependencies:
+
+### 5.1. Tạo phụ thuộc vào các task khác
+```http
+POST /api/tasks//{taskId}/dependencies/{dependencyId}
+```
+- **Mô tả**:Tạo sự phụ thuộc giữa task này với task khác.
+- **Phản hồi**:
+- ![add-dependency](https://github.com/huynhhongson/img-todo-list-application/blob/main/add-dependency.png)
+
+### 5.2. Xóa phụ thuộc giữa task này các task khác
+```http
+DELETE /api/tasks//{taskId}/dependencies/{dependencyId}
+```
+- **Mô tả**:Xóa sự phụ thuộc giữa các task với nhau.
+- **Phản hồi**:
+- ![remove-dependency](https://github.com/huynhhongson/img-todo-list-application/blob/main/remove-dependency.png)
+
+### 5.3. Phụ thuộc vòng
+```http
+DELETE /api/tasks//{taskId}/dependencies/{dependencyId}
+```
+- **Mô tả**:Lỗi khi có sự phụ thuộc vòng.
+- **Phản hồi**:
+- ![error-messages-when-circular-dependencies](https://github.com/huynhhongson/img-todo-list-application/blob/main/error-messages-when-circular-dependencies.png)
+
+## 6. Liên hệ
 Nếu có bất kỳ câu hỏi hoặc vấn đề nào, vui lòng liên hệ qua email: `hhongson5011@gmail.com`.
 
