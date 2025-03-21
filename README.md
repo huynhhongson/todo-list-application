@@ -17,8 +17,8 @@ To-Do List Application là một RESTful API giúp người dùng quản lý cô
 - Maven 3.8+
 
 ### 3.2. Cấu hình database
-Cần load file todolistapplication.sql để có database cho việc test các API
-Cập nhật thông tin kết nối MySQL trong `application.properties`:
+- Cần load file `todolistapplication.sql` để có database cho việc test các API
+- Cập nhật thông tin kết nối MySQL trong `application.properties`:
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/todoListApplication
 spring.datasource.username=root
@@ -40,16 +40,16 @@ mvn spring-boot:run
 ```http
 POST /api/tasks
 ```
-- **Mô tả**: Lấy danh sách tất cả các task.
+- **Mô tả**: Tạo task mới.
 - **Phản hồi**:
 - ![create-a-new-task](https://github.com/huynhhongson/img-todo-list-application/blob/main/create-new-task.png)
-### 4.2. Lấy danh sách task
+### 4.2. Lấy danh sách các task
 ```http
 GET /api/tasks
 ```
 - **Mô tả**: Lấy danh sách tất cả các task.
 - **Phản hồi**:
-- ![get-all-task](https://github.com/huynhhongson/img-todo-list-application/blob/main/get-all-task.png)
+- ![get-all-tasks](https://github.com/huynhhongson/img-todo-list-application/blob/main/get-all-tasks.png)
 ### 4.3. Lấy thông tin task theo ID
 ```http
 GET /api/tasks/{id}
@@ -101,7 +101,7 @@ DELETE /api/tasks//{taskId}/dependencies/{dependencyId}
 
 ### 5.3. Phụ thuộc vòng
 ```http
-DELETE /api/tasks//{taskId}/dependencies/{dependencyId}
+POST /api/tasks//{taskId}/dependencies/{dependencyId}
 ```
 - **Mô tả**:Lỗi khi có sự phụ thuộc vòng.
 - **Phản hồi**:
